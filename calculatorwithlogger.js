@@ -24,6 +24,14 @@ const arithmeticOperations = {
         }
         return num1 / num2;
     },
+    exponentiation: (num1, num2) => Math.pow(num1, num2),
+    squareRoot: (num) => {
+        if (num < 0) {
+            throw new Error("Square root of negative numbers is not allowed");
+        }
+        return Math.sqrt(num);
+    },
+    modulo: (num1, num2) => num1 % num2,
 };
 
 // Endpoint handler generator
@@ -43,12 +51,30 @@ const createArithmeticEndpoint = (operation) => (req, res) => {
         res.status(500).json({ statuscode: 500, msg: error.toString() });
     }
 };
+app.get("/squareRoot", (req, res) => {
+    try {
+        const num = parseFloat(req.query.num);
+        if (isNaN(num)) {
+            throw new Error("The value you enter is not a valid number");
+        }
+
+        const result = arithmeticOperations.squareRoot(num);
+        logger.info(`Square root of ${num} resulted in ${result}`);
+        res.status(200).json({ statuscode: 200, data: result });
+    } catch (error) {
+        logger.error(error.message);
+        res.status(500).json({ statuscode: 500, msg: error.toString() });
+    }
+});
 
 // Define routes
 app.get("/add", createArithmeticEndpoint('add'));
 app.get("/subtract", createArithmeticEndpoint('subtract'));
 app.get("/multiply", createArithmeticEndpoint('multiply'));
 app.get("/divide", createArithmeticEndpoint('divide'));
+app.get("/modulo", createArithmeticEndpoint('modulo'));
+app.get("/exponentiation", createArithmeticEndpoint('exponentiation'));
+
 
 const port = 3040;
 app.listen(port, () => {

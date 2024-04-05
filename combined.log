@@ -4,3 +4,7 @@
 {"level":"info","message":"Operation multiply with parameters 43 and 24 resulted in 1032","service":"calculate-service"}
 {"level":"info","message":"Operation divide with parameters 13431 and 34 resulted in 395.02941176470586","service":"calculate-service"}
 {"level":"error","message":"Division by zero is not allowed","service":"calculate-service"}
+{"level":"error","message":"Parameter is not a valid number","service":"calculate-service"}
+{"level":"error","message":"Parameter is not a valid number","service":"calculate-service"}
+{"level":"info","message":"Square root of 4 resulted in 2","service":"calculate-service"}
+{"level":"info","message":"Square root of 16 resulted in 4","service":"calculate-service"}
